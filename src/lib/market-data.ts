@@ -119,7 +119,7 @@ export const marketDataService = {
     const points = RANGE_POINTS[range];
     const drift = RANGE_DRIFT[range];
     const values = series(`portfolio:${range}`, points, currentValue / (1 + drift), drift, 0.008);
-    const scale = currentValue / values[values.length - 1];
+    const scale = currentValue / (values[values.length - 1] ?? 1);
     return values.map((v, i) => ({
       date: labelFor(range, i, points),
       value: Math.round(v * scale),
